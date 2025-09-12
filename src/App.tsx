@@ -1,5 +1,4 @@
-import CalendarHeader from "@/Components/calendar-header.tsx";
-import {CalendarContextProvider} from "@/context/calendar-context.tsx";
+import CalendarHeader from "@/Components/CalendarHeader.tsx";
 
 function App() {
     return (
