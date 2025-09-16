@@ -1,5 +1,6 @@
 
 import getArrayMonth from "@/Functions/getArrayMonth.ts";
+import DaysInMonth from "@/Components/YearViewComponents/DaysInMonth.tsx";
 
 
 export default function MonthContainers() {
@@ -9,8 +10,10 @@ export default function MonthContainers() {
     const months = getArrayMonth(date);
     console.log(months);
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
-
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+            {months.map((month, i) => (
+                <DaysInMonth key={i} month={month} />
+            ))}
         </div>
     );
 };
