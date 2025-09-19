@@ -1,3 +1,5 @@
+import type {EventsStore} from "@/types.ts";
+import { persist } from "zustand/middleware";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Event } from "@/types.ts";
@@ -10,6 +12,19 @@ type EventsStore = {
 };
 
 const useEventStore = create<EventsStore>()(
+    persist(
+        (set)=>({
+            events : [],
+            addEvent : (event)=>
+                set((state)=>({
+                    events:[...state.events, event],
+                })),
+            editEvent: (id, edited) =>
+                set((state) => ({
+                    events: state.events.map((e) =>
+                        e.id === id ? { ...e, ...edited } : e
+                    ),
+                })),
 	persist(
 		(set) => ({
 			events: [],
@@ -24,6 +39,13 @@ const useEventStore = create<EventsStore>()(
 					),
 				})),
 
+            removeEvent: (id) =>
+                set((state) => ({
+                    events: state.events.filter((e) => e.id !== id),
+                })),
+        }),
+        { name: "Event-Storage" }
+    )
 			removeEvent: (id) =>
 				set((state) => ({
 					events: state.events.filter((e) => e.id !== id),
