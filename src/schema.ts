@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z} from "zod";
 
 export const eventSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -8,4 +8,8 @@ export const eventSchema = z.object({
     color: z.enum(["blue", "green", "red", "yellow", "purple", "orange", "gray"], {message: "Color is required"}),
     isAllDay: z.boolean().default(false),
 });
-export type EventFormData = z.infer<typeof eventSchema>;
+// type InputType = z.input<typeof eventSchema>;
+//type OutputType =z.output<typeof eventSchema>;
+
+export type EventFormData = z.infer<typeof eventSchema>
+    //InputType | OutputType;
