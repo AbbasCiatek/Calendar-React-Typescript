@@ -1,4 +1,5 @@
 import { z} from "zod";
+import {isAfter} from "date-fns";
 
 export const eventSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -7,6 +8,9 @@ export const eventSchema = z.object({
     endDate: z.date({message: "End date is required"}),
     color: z.enum(["blue", "green", "red", "yellow", "purple", "orange", "gray"], {message: "Color is required"}),
     isAllDay: z.boolean(),
+}).refine((data)=> isAfter(data.endDate,data.startDate) ,{
+    message: "The ending date must be after the starting date ",
+    path:["endDate"],
 });
 // type InputType = z.input<typeof eventSchema>;
 //type OutputType =z.output<typeof eventSchema>;
