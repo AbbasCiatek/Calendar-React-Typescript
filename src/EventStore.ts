@@ -1,18 +1,34 @@
-import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Event } from "@/types.ts";
+import { create } from "zustand";
+import {areIntervalsOverlapping} from "date-fns";
 
 type EventsStore = {
 	events: Event[];
 	addEvent: (event: Event) => void;
 	editEvent: (id: string, edited: Partial<Event>) => void;
 	removeEvent: (id: string) => void;
+    getEventByDateRange:(startDate:Date, endDate:Date) => Event[];
 };
 
 const useEventStore = create<EventsStore>()(
     persist(
-        (set)=>({
+        (set,get)=>({
             events : [],
+            getEventsByDateRange: (startDate:Date, endDate:Date) => {
+                if (!startDate || !endDate) return get().events;
+
+                return get().events.filter((event) => {
+                    if(areIntervalsOverlapping({
+                       start:event.startDate,
+                        end:event.endDate,
+                    },{
+                        start:startDate,
+                        end:endDate,
+                    }))
+                    return (event);
+                });
+            },
+
             addEvent : (event)=>
                 set((state)=>({
                     events:[...state.events, event],
@@ -20,6 +36,7 @@ const useEventStore = create<EventsStore>()(
             editEvent: (id, edited) =>
                 set((state) => ({
                     events: state.events.map((e) =>
+                        e.id === id ? { ...e, ...edited } : e
                     ),
                 })),
 
@@ -28,6 +45,8 @@ const useEventStore = create<EventsStore>()(
                     events: state.events.filter((e) => e.id !== id),
                 })),
         }),
+        { name: "Event-Storage" }
+    )
 );
 
 export default useEventStore;

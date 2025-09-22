@@ -15,5 +15,5 @@ export type Event = {
     startDate: Date;
     endDate: Date;
     color: COLORS;
-    isAllDay? : boolean;
+    isAllDay : boolean;
 };
