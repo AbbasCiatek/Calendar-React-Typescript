@@ -10,8 +10,14 @@ export default function DayTimeCells({date}:{date:Date}) {
     const {getSingleDayEvents} = useEventStore();
 
 
-    const singleDayEvents:Events = getSingleDayEvents(startOfDay(date),endOfDay(date));
+    const events:Events = getSingleDayEvents(startOfDay(date),endOfDay(date));
 
+    //the date is saved in store as Date and got as string .. need to cast it date object
+    const singleDayEvents=events.map(e => ({
+        ...e,
+        startDate: new Date(e.startDate),
+        endDate: new Date(e.endDate),
+    }));
 
 
     return (
