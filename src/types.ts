@@ -1,4 +1,4 @@
-export type COLORS = "blue" | "green" | "red" | "yellow" | "purple" | "orange" | "gray";
+export type COLORS = "blue" | "green" | "red" | "yellow" | "purple" | "orange";
 
 export type Event = {
     id: string;
