@@ -24,7 +24,7 @@ export default function DayTimeCells({date}:{date:Date}) {
 
         <div  className="relative flex-1 border-l bg-white">
             {/*date and views have to be set by hook not prop*/}
-            <TimeCells day={date} view={"day"} />
+            <TimeCells day={date}  />
             { singleDayEvents.length>0 && <EventsPositioning singleDayEvents={singleDayEvents} day={date}/>}
             {isToday(date) &&  <TimeLine/>}
         </div>
