@@ -40,11 +40,20 @@ export default function DaysInMonth({month}:{month:Date}){
                     >
                     { formatDate(day,'d')}
                 </div>
-                        {dayEvent.length > 0 && <EventListDialog><EventBullet color={dayEvent[0].color} /></EventListDialog>}
-                            {dayEvent.length > 1 &&
-                            <span className="text-[0.6rem]">
-                                 +{dayEvent.length - 1} </span>
-                            }
+                        {dayEvent.length > 1 ? (
+                            <div className="flex flex-col justify-center items-center">
+                                {/*<EventListDialog events ={dayEvent}>*/}
+                                    <EventBullet color={dayEvent[0].color} />
+                                <span className="text-[0.6rem]">+{dayEvent.length - 1}</span>
+                                {/*</EventListDialog>*/}
+                            </div>
+                        ):dayEvent.length > 0  &&
+                            <div className="flex flex-col justify-center items-center">
+                                {/*<EventDetailsDialog event={dayEvent[0]} >*/}
+                                    <EventBullet color={dayEvent[0].color} />
+                                {/*</EventDetailsDialog>*/}
+                            </div>}
+
                     </div>
             );
             })}
