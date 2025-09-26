@@ -1,6 +1,6 @@
 
-import getArrayMonth from "@/Functions/getArrayMonth.ts";
 import DaysInMonth from "@/Components/YearViewComponents/DaysInMonth.tsx";
+import {getArrayMonth} from "@/dateHelpers.ts";
 
 
 export default function MonthContainers() {
