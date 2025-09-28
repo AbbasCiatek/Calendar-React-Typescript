@@ -5,16 +5,12 @@ import {daysInMonth} from "@/dateHelpers.ts";
 import useEventStore from "@/EventStore.ts";
 import type {Event} from "@/types.ts";
 import {EventBullet} from "@/Components/Events/EventBullet.tsx";
-import EventListDialog from "@/Components/Events/EventListDialog.tsx";
+import EventListDialog from "@/Components/Dialog/EventListDialog.tsx";
+import EventDetailsDialog from "@/Components/Dialog/EventDetailsDialog.tsx";
 
 export default function DaysInMonth({month}:{month:Date}){
     const days = daysInMonth(month);
     const firstDayIndex = days.firstDayIndex;
-    // const handleDayClicked = (day:Date) => {
-    //     alert(day);
-    //     //must navigate to the day in the dayView
-    // }
-
     const {getEventsByDateRange} = useEventStore();
     const monthlyEvents:Event[] = getEventsByDateRange(startOfMonth(month),endOfMonth(month));
 
@@ -42,16 +38,16 @@ export default function DaysInMonth({month}:{month:Date}){
                 </div>
                         {dayEvent.length > 1 ? (
                             <div className="flex flex-col justify-center items-center">
-                                {/*<EventListDialog events ={dayEvent}>*/}
+                                <EventListDialog events={dayEvent} date={day} >
                                     <EventBullet color={dayEvent[0].color} />
                                 <span className="text-[0.6rem]">+{dayEvent.length - 1}</span>
-                                {/*</EventListDialog>*/}
+                                </EventListDialog>
                             </div>
                         ):dayEvent.length > 0  &&
                             <div className="flex flex-col justify-center items-center">
-                                {/*<EventDetailsDialog event={dayEvent[0]} >*/}
+                                <EventDetailsDialog event={dayEvent[0]} >
                                     <EventBullet color={dayEvent[0].color} />
-                                {/*</EventDetailsDialog>*/}
+                                </EventDetailsDialog>
                             </div>}
 
                     </div>
