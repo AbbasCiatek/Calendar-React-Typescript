@@ -1,5 +1,4 @@
-import {formatDate, isToday} from "date-fns";
-import {clsx} from "clsx";
+import {formatDate} from "date-fns";
 
 export default function DayDisplay({date}:{date:Date}){
     //"text-blue-500" : "text-muted-foreground"
