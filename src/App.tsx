@@ -1,5 +1,12 @@
+import DndProviderWrapper from "@/dnd/DndProviderWrapper.tsx";
+
 function App() {
-	return <div className="container m-auto mt-5"></div>;
+
+  return (
+    <DndProviderWrapper>
+        <div className="container m-auto mt-5"></div>;
+    </DndProviderWrapper>
+  )
 }
 
-export default App;
+export default App
