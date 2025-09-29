@@ -11,12 +11,9 @@ export const eventSchema = z.object({
 }).refine((data)=> isAfter(data.endDate,data.startDate) ,{
     message: "The ending date must be after the starting date ",
     path:["endDate"],
-}).refine((data)=> (data.endDate.getTime() - data.startDate.getTime())> (60 *1000) ,{
-  message: "Minimum Event Duration is One Minute ",
+}).refine((data)=> (data.endDate.getTime() - data.startDate.getTime())> (5*60*1000) ,{
+  message: "Minimum Event Duration is Five Minutes ",
   path:["endDate"],
 });
-// type InputType = z.input<typeof eventSchema>;
-//type OutputType =z.output<typeof eventSchema>;
 
 export type EventFormData = z.infer<typeof eventSchema>
-    //InputType | OutputType;
