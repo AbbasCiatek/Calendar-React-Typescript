@@ -1,19 +1,30 @@
 import {Hours} from "@/helpers.ts";
-import {clsx} from "clsx";
-import {isToday} from "date-fns";
+import {setHours, setMinutes} from "date-fns";
+export default function TimeCells({day}:{day:Date} ) {
 
-export default function TimeCells({day,view}:{day:Date,view:string} ) {
 
     return (
         <>
             {Hours.map((hour, index) => {
                 return (
-                    <div key={hour} className="relative h-12" >
-                        {index !== 0 && <div className="pointer-events-none absolute inset-x-0 top-0 border-b"></div>}
-                        <div className={clsx("absolute inset-x-0 top-0 h-6 cursor-pointer ", view==="week" && isToday(day) ? "hover:bg-blue-50 ": "  hover:bg-accent")} />
-                        <div className={clsx("pointer-events-none absolute inset-x-0 top-1/2 border-b ", view==="week" && isToday(day) ? " border-dashed border-gray-300 " : "border-dashed" )}></div>
-                        <div className={clsx("absolute inset-x-0 top-6 h-6 cursor-pointer ", view==="week" && isToday(day) ? "hover:bg-blue-50": "  hover:bg-accent")} />
+                    <div key={hour} className="relative h-24" >
+                        {index !== 0 && <div className="pointer-events-none absolute  inset-x-0 top-0 border-b"></div>}
+                        {/*<DroppableTimeCell date={day} hour={hour} minute={0}>*/}
+                        {/*<AddEditEventDialog startDate={setMinutes(setHours(day,hour),0)} endDate={setMinutes(setHours(day,hour),30)} >*/}
+                        <div className="absolute inset-x-0 top-0 h-12 cursor-pointer hover:bg-accent"/>
+                        {/*</AddEditEventDialog>*/}
+                        {/*</DroppableTimeCell>*/}
+
+
+                        <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b   border-dashed"></div>
+                        {/*<DroppableTimeBlock date={day} hour={hour} minute={30}>*/}
+                        {/*<AddEditEventDialog startDate={setMinutes(setHours(day,hour),30)} endDate={setMinutes(setHours(day,hour+1),0)} >*/}
+                        <div className="absolute inset-x-0 top-12 h-12 cursor-pointer  hover:bg-accent" />
+                        {/*</AddEditEventDialog>*/}
+                        {/*</DroppableTimeBlock>*/}
                     </div>
+
+
                 );
             })}
         </>
