@@ -1,10 +1,8 @@
-import {rangeDisplayer} from "@/Functions/RangeDisplayerFunction.ts";
 import {ChevronRightIcon, ChevronLeftIcon, } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type {Views} from "@/types.ts";
-import DateSubtracterFunction from "@/Functions/DateSubtracterFunction.ts";
-import DateAdderFunction from "@/Functions/DateAdderFunction.ts";
 import {useCalendar} from "@/context/context.tsx";
+import {DateAdderFunction, DateSubtracterFunction, rangeDisplayer} from "@/dateHelpers.ts";
 
 
 export default function NavigationArrows() {
