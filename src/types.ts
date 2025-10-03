@@ -9,11 +9,11 @@ export type COLORS =
 	| "gray";
 
 export type Event = {
-	id: string;
-	title: string;
-	description: string;
-	startDate: Date;
-	endDate: Date;
-	color: COLORS;
-	isAllDay?: boolean;
+    id: string;
+    title: string;
+    description: string;
+    startDate: Date;
+    endDate: Date;
+    color: COLORS;
+    isAllDay : boolean;
 };
