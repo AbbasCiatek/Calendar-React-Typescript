@@ -1,4 +1,5 @@
 import CalendarHeader from "@/Components/calendar-header.tsx";
+import WeekView from "@/Components/week-view.tsx";
 import { CalendarContextProvider } from "@/context/calendar-context.tsx";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
 		<CalendarContextProvider>
 			<div className="container m-auto mt-5">
 				<CalendarHeader />
+				<WeekView />
 			</div>
 		</CalendarContextProvider>
 	);
