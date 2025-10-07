@@ -1,47 +1,62 @@
+import type { CSSProperties, ReactNode } from "react";
 import { useDragLayer } from "react-dnd";
 import type { Event } from "@/types.ts";
 
 interface DragItem {
-    event: Event;
-    children: ReactNode;
-    width: number;
-    height: number;
+	event: Event;
+	children: ReactNode;
+	width: number;
+	height: number;
 }
 
 export default function CustomDragLayer() {
-        item: monitor.getItem() as DragItem | null,
-        itemType: monitor.getItemType(),
-        isDragging: monitor.isDragging(),
-        currentOffset: monitor.getClientOffset(),
-        initialOffset: monitor.getInitialSourceClientOffset(),
-        initialClientOffset: monitor.getInitialClientOffset(),
-    }));
+	const {
+		isDragging,
+		item,
+		currentOffset,
+		initialOffset,
+		initialClientOffset,
+	} = useDragLayer((monitor) => ({
+		item: monitor.getItem() as DragItem | null,
+		itemType: monitor.getItemType(),
+		isDragging: monitor.isDragging(),
+		currentOffset: monitor.getClientOffset(),
+		initialOffset: monitor.getInitialSourceClientOffset(),
+		initialClientOffset: monitor.getInitialClientOffset(),
+	}));
 
-        return null;
-    }
+	if (
+		!isDragging ||
+		!item ||
+		!currentOffset ||
+		!initialOffset ||
+		!initialClientOffset
+	) {
+		return null;
+	}
 
-    const offsetX = initialClientOffset.x - initialOffset.x;
-    const offsetY = initialClientOffset.y - initialOffset.y;
+	const offsetX = initialClientOffset.x - initialOffset.x;
+	const offsetY = initialClientOffset.y - initialOffset.y;
 
-    const layerStyles: React.CSSProperties = {
-        position: "fixed",
-        pointerEvents: "none",
-        zIndex: 100,
-        left: currentOffset.x - offsetX,
-        top: currentOffset.y - offsetY,
-    };
+	const layerStyles: CSSProperties = {
+		position: "fixed",
+		pointerEvents: "none",
+		zIndex: 100,
+		left: currentOffset.x - offsetX,
+		top: currentOffset.y - offsetY,
+	};
 
-    return (
-        <div style={layerStyles}>
-            <div
-                className=""
-                style={{
-                    width: item.width,
-                    height: item.height,
-                }}
-            >
-                {item.children}
-            </div>
-        </div>
-    );
+	return (
+		<div style={layerStyles}>
+			<div
+				className=""
+				style={{
+					width: item.width,
+					height: item.height,
+				}}
+			>
+				{item.children}
+			</div>
+		</div>
+	);
 }
