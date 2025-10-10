@@ -23,7 +23,6 @@ const useEventStore = create<EventsStore>()(
 						e.id === id ? { ...e, ...edited } : e,
 					),
 				})),
-
 			removeEvent: (id) =>
 				set((state) => ({
 					events: state.events.filter((e) => e.id !== id),
